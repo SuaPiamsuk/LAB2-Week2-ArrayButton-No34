@@ -878,7 +878,7 @@ void ButtonMatrixUpdate()
  80007f2:	4b2e      	ldr	r3, [pc, #184]	; (80008ac <ButtonMatrixUpdate+0x120>)
  80007f4:	801a      	strh	r2, [r3, #0]
 														//0b000 | 0b1000
-				ID |= ButtonMatrixState;
+				ID |= ButtonMatrixState; //to memory state
  80007f6:	4b2e      	ldr	r3, [pc, #184]	; (80008b0 <ButtonMatrixUpdate+0x124>)
  80007f8:	881a      	ldrh	r2, [r3, #0]
  80007fa:	4b2c      	ldr	r3, [pc, #176]	; (80008ac <ButtonMatrixUpdate+0x120>)

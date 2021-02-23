@@ -103,7 +103,11 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  ButtonMatrixUpdate();
+	ButtonMatrixUpdate();
+//	if(ID == ) //check id = 62340500034
+//	{
+//
+//	}
   }
   /* USER CODE END 3 */
 }
@@ -272,7 +276,7 @@ void ButtonMatrixUpdate()
 			{
 				ButtonMatrixState |= (uint16_t)0x1 <<(i + ButtonMatrixLine * 4);    // 0x1 == 1  : ButtonMatrixState = (uint16_t)1 <<i;
 														//0b000 | 0b1000
-				ID |= ButtonMatrixState;
+				ID |= ButtonMatrixState; //to memory state
 			}
 			else
 			{
