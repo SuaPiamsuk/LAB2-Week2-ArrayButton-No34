@@ -262,7 +262,33 @@ uint16_t ButtonMatrixPin[8] ={GPIO_PIN_10,GPIO_PIN_3,GPIO_PIN_5,GPIO_PIN_4,GPIO_
 uint8_t ButtonMatrixLine = 0; //Where is R
 void ButtonMatrixUpdate()
 {
+	if(HAL_GetTick() - ButtonMatrixTimestamp >= 100)
+	{
+		ButtonMatrixTimestamp = HAL_GetTick();
+		int i;
+		for(i = 0;i<4;i+=1){ //++i is faster than i++
+			GPIO_PinState Pinstate = HAL_GPIO_ReadPin(ButtonMatrixPort[i], ButtonMatrixPin[i]);
+			if(Pinstate == GPIO_PIN_RESET) // button pressed
+			{
+				ButtonMatrixState |= (uint16_t)0x1 <<(i + ButtonMatrixLine * 4);    // 0x1 == 1  : ButtonMatrixState = (uint16_t)1 <<i;
+														//0b000 | 0b1000
+				ID |= ButtonMatrixState;
+			}
+			else
+			{
+				ButtonMatrixState &= ~((uint16_t)0x1 <<(i + ButtonMatrixLine * 4)); //0b000 & ~(0b1000)
+			}
+		}
+		uint8_t NowOutputPin = ButtonMatrixLine + 4; // set Ln
+		HAL_GPIO_WritePin(ButtonMatrixPort[NowOutputPin],ButtonMatrixPin[NowOutputPin], GPIO_PIN_SET);
 
+		ButtonMatrixLine = (ButtonMatrixLine+1) % 4; //update new line
+
+		uint8_t NextOutputPin = ButtonMatrixLine + 4; // reset Ln+1
+		HAL_GPIO_WritePin(ButtonMatrixPort[NextOutputPin],ButtonMatrixPin[NextOutputPin], GPIO_PIN_RESET);
+
+
+	}
 }
 
 /* USER CODE END 4 */
