@@ -43,7 +43,9 @@
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+uint16_t ButtonMatrixState = 0;
+uint16_t ButtonMatrixTimestamp = 0;
+uint16_t ID = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -51,6 +53,8 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
+
+void ButtonMatrixUpdate();
 
 /* USER CODE END PFP */
 
