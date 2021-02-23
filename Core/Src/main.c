@@ -255,6 +255,16 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
+//Make my function
+//port pin array port0-3 input-R /4-7 output-L
+GPIO_TypeDef *ButtonMatrixPort[8] = {GPIOA,GPIOB,GPIOB,GPIOB,GPIOA,GPIOC,GPIOB,GPIOA};
+uint16_t ButtonMatrixPin[8] ={GPIO_PIN_10,GPIO_PIN_3,GPIO_PIN_5,GPIO_PIN_4,GPIO_PIN_9,GPIO_PIN_7,GPIO_PIN_6,GPIO_PIN_7};
+uint8_t ButtonMatrixLine = 0; //Where is R
+void ButtonMatrixUpdate()
+{
+
+}
+
 /* USER CODE END 4 */
 
 /**
