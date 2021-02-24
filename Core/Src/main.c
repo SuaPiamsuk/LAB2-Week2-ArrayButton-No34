@@ -300,12 +300,26 @@ void ButtonMatrixUpdate()
 
 void IDchecker()
 {
-	if(ID == 0 && ButtonMatrixState == 0b1000000000000000)
+	if(ID == 0 && ButtonMatrixState == 0b1000000)
 	{
-//		ID = ID << 1;
-//		ID |= 1;
 		ID |= (uint16_t)0x1;
 	}
+	else if(ID == 1 )
+	{
+		if(ButtonMatrixState == 0b1000000000)
+		{
+			ID |= (uint16_t)0x1 << 1;
+		}
+		else if(ButtonMatrixState != 0b1000000 && ButtonMatrixState != 0)
+		{
+			ID &= ~ID;
+		}
+
+	}
+//	else
+//	{
+//		ID = 0;
+//	}
 }
 
 /* USER CODE END 4 */
