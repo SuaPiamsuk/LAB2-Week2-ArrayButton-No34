@@ -300,26 +300,128 @@ void ButtonMatrixUpdate()
 
 void IDchecker()
 {
-	if(ID == 0 && ButtonMatrixState == 0b1000000)
+	if(ButtonMatrixState == 0 && ID != 0) //มีประโยชน์เมื่อกดเลขซ้ำ
 	{
 		ID |= (uint16_t)0x1;
 	}
-	else if(ID == 1 )
+	if(ID == 0 && ButtonMatrixState == 0b1000000) //check "6"
+	{
+		ID |= (uint16_t)0x1;
+	}
+	else if(ID == 0b1 ) 							  //check "2"
 	{
 		if(ButtonMatrixState == 0b1000000000)
 		{
-			ID |= (uint16_t)0x1 << 1;
+			ID <<= 1;
 		}
 		else if(ButtonMatrixState != 0b1000000 && ButtonMatrixState != 0)
 		{
 			ID &= ~ID;
 		}
-
 	}
-//	else
-//	{
-//		ID = 0;
-//	}
+	else if(ID == 0b11 ) 						 //check "3"
+	{
+		if(ButtonMatrixState == 0b10000000000)
+		{
+			ID <<= 1;
+		}
+		else if(ButtonMatrixState != 0b1000000000 && ButtonMatrixState != 0)
+		{
+			ID &= ~ID;
+		}
+	}
+	else if(ID == 0b111 ) 						 //check "4"
+	{
+		if(ButtonMatrixState == 0b10000)
+		{
+			ID <<= 1;
+		}
+		else if(ButtonMatrixState != 0b10000000000 && ButtonMatrixState != 0)
+		{
+			ID &= ~ID;
+		}
+	}
+	else if(ID == 0b1111 ) 						 //check "0"
+	{
+		if(ButtonMatrixState == 0b1000000000000)
+		{
+			ID <<= 1;
+		}
+		else if(ButtonMatrixState != 0b10000 && ButtonMatrixState != 0)
+		{
+			ID &= ~ID;
+		}
+	}
+	else if(ID == 0b11111 ) 						 //check "5"
+	{
+		if(ButtonMatrixState == 0b100000)
+		{
+			ID <<= 1;
+		}
+		else if(ButtonMatrixState != 0b1000000000000 && ButtonMatrixState != 0)
+		{
+			ID &= ~ID;
+		}
+	}
+	else if(ID == 0b111111 ) 						 //check "0" +1
+	{
+		if(ButtonMatrixState == 0b1000000000000)
+		{
+			ID = ID << 1;
+		}
+		else if(ButtonMatrixState != 0b100000 && ButtonMatrixState != 0)
+		{
+			ID &= ~ID;
+		}
+	}
+	else if(ID == 0b1111111 ) 						 //check "0" +2
+	{
+		if(ButtonMatrixState == 0b1000000000000)
+		{
+			ID <<= 1;
+		}
+		else if(ButtonMatrixState != 0b1000000000000 && ButtonMatrixState != 0)
+		{
+			ID &= ~ID;
+		}
+	}
+	else if(ID == 0b11111111 ) 						 //check "0" +3
+	{
+		if(ButtonMatrixState == 0b1000000000000)
+		{
+			ID <<= 1;
+		}
+		else if(ButtonMatrixState != 0b1000000000000 && ButtonMatrixState != 0)
+		{
+			ID &= ~ID;
+		}
+	}
+	else if(ID == 0b111111111 ) 						 //check "3"
+	{
+		if(ButtonMatrixState == 0b10000000000)
+		{
+			ID <<= 1;
+		}
+		else if(ButtonMatrixState != 0b1000000000000 && ButtonMatrixState != 0)
+		{
+			ID &= ~ID;
+		}
+	}
+	else if(ID == 0b1111111111 ) 						 //check "4"
+	{
+		if(ButtonMatrixState == 0b10000)
+		{
+			ID <<= 1;
+		}
+		else if(ButtonMatrixState != 0b10000000000 && ButtonMatrixState != 0)
+		{
+			ID &= ~ID;
+		}
+	}
+	else if(ID == 0b11111111111 )
+	{
+		ID = 0;
+	}
 }
 
 /* USER CODE END 4 */
