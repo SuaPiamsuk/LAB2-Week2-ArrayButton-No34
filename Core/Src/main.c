@@ -210,7 +210,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7|GPIO_PIN_9, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_7, GPIO_PIN_SET);
@@ -224,8 +224,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LD2_Pin PA7 PA9 */
-  GPIO_InitStruct.Pin = LD2_Pin|GPIO_PIN_7|GPIO_PIN_9;
+  /*Configure GPIO pins : LD2_Pin PA7 PA8 PA9 */
+  GPIO_InitStruct.Pin = LD2_Pin|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -268,7 +268,7 @@ uint16_t ButtonMatrixPin[8] ={GPIO_PIN_10,GPIO_PIN_3,GPIO_PIN_5,GPIO_PIN_4,GPIO_
 uint8_t ButtonMatrixLine = 0; //Where is R
 void ButtonMatrixUpdate()
 {
-	if(HAL_GetTick() - ButtonMatrixTimestamp >= 100)
+	if(HAL_GetTick() - ButtonMatrixTimestamp >= 50)
 	{
 		ButtonMatrixTimestamp = HAL_GetTick();
 		int i;
@@ -300,7 +300,7 @@ void ButtonMatrixUpdate()
 
 void IDchecker()
 {
-	if(ButtonMatrixState == 0 && ID != 0) //มีประโยชน์เมื่อกดเลขซ้ำ
+	if(ButtonMatrixState == 0 && ID != 0) //มีประโยชน์เมื่อ�?ดเลขซ้ำ
 	{
 		ID |= (uint16_t)0x1;
 	}
@@ -418,9 +418,13 @@ void IDchecker()
 			ID &= ~ID;
 		}
 	}
-	else if(ID == 0b11111111111 )
+	else if(ID == 0b11111111111 && ButtonMatrixState == 0b1000000000000000) //
 	{
-		ID = 0;
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
+	}
+	else if(ButtonMatrixState == 0b1000)
+	{
+		ID &= ~ID;
 	}
 }
 
