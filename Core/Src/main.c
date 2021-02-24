@@ -55,6 +55,7 @@ static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
 void ButtonMatrixUpdate();
+void IDchecker();
 
 /* USER CODE END PFP */
 
@@ -104,6 +105,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	ButtonMatrixUpdate();
+	IDchecker();
 //	if(ID == ) //check id = 62340500034
 //	{
 //
@@ -276,7 +278,8 @@ void ButtonMatrixUpdate()
 			{
 				ButtonMatrixState |= (uint16_t)0x1 <<(i + ButtonMatrixLine * 4);    // 0x1 == 1  : ButtonMatrixState = (uint16_t)1 <<i;
 														//0b000 | 0b1000
-				ID |= ButtonMatrixState; //to memory state
+				//ID |= ButtonMatrixState; //to memory state
+				IDchecker();
 			}
 			else
 			{
@@ -292,6 +295,16 @@ void ButtonMatrixUpdate()
 		HAL_GPIO_WritePin(ButtonMatrixPort[NextOutputPin],ButtonMatrixPin[NextOutputPin], GPIO_PIN_RESET);
 
 
+	}
+}
+
+void IDchecker()
+{
+	if(ID == 0 && ButtonMatrixState == 0b1000000000000000)
+	{
+//		ID = ID << 1;
+//		ID |= 1;
+		ID |= (uint16_t)0x1;
 	}
 }
 
