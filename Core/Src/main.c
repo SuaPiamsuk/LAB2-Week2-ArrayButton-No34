@@ -298,13 +298,13 @@ void ButtonMatrixUpdate()
 	}
 }
 
-void IDchecker()
+void IDchecker() //ID = 62340500034 = 0b1111111111
 {
-	if(ButtonMatrixState == 0 && ID != 0) //มีประโยชน์เมื่อ�?ดเลขซ้ำ
+	if(ButtonMatrixState == 0 && ID != 0)
 	{
 		ID |= (uint16_t)0x1;
 	}
-	if(ID == 0 && ButtonMatrixState == 0b1000000) //check "6"
+	if(ID == 0 && ButtonMatrixState == 0b1000000)     //check "6"
 	{
 		ID |= (uint16_t)0x1;
 	}
@@ -319,7 +319,7 @@ void IDchecker()
 			ID &= ~ID;
 		}
 	}
-	else if(ID == 0b11 ) 						 //check "3"
+	else if(ID == 0b11 ) 						     //check "3"
 	{
 		if(ButtonMatrixState == 0b10000000000)
 		{
@@ -330,7 +330,7 @@ void IDchecker()
 			ID &= ~ID;
 		}
 	}
-	else if(ID == 0b111 ) 						 //check "4"
+	else if(ID == 0b111 ) 						    //check "4"
 	{
 		if(ButtonMatrixState == 0b10000)
 		{
@@ -341,7 +341,7 @@ void IDchecker()
 			ID &= ~ID;
 		}
 	}
-	else if(ID == 0b1111 ) 						 //check "0"
+	else if(ID == 0b1111 ) 						   //check "0"
 	{
 		if(ButtonMatrixState == 0b1000000000000)
 		{
@@ -352,7 +352,7 @@ void IDchecker()
 			ID &= ~ID;
 		}
 	}
-	else if(ID == 0b11111 ) 						 //check "5"
+	else if(ID == 0b11111 ) 					  //check "5"
 	{
 		if(ButtonMatrixState == 0b100000)
 		{
@@ -363,7 +363,7 @@ void IDchecker()
 			ID &= ~ID;
 		}
 	}
-	else if(ID == 0b111111 ) 						 //check "0" +1
+	else if(ID == 0b111111 ) 				     //check "0" +1
 	{
 		if(ButtonMatrixState == 0b1000000000000)
 		{
@@ -374,7 +374,7 @@ void IDchecker()
 			ID &= ~ID;
 		}
 	}
-	else if(ID == 0b1111111 ) 						 //check "0" +2
+	else if(ID == 0b1111111 ) 				    //check "0" +2
 	{
 		if(ButtonMatrixState == 0b1000000000000)
 		{
