@@ -921,7 +921,7 @@ void ButtonMatrixUpdate()
  8000834:	781b      	ldrb	r3, [r3, #0]
  8000836:	3304      	adds	r3, #4
  8000838:	70fb      	strb	r3, [r7, #3]
-		HAL_GPIO_WritePin(ButtonMatrixPort[NowOutputPin],ButtonMatrixPin[NowOutputPin], GPIO_PIN_SET);
+		HAL_GPIO_WritePin(ButtonMatrixPort[NowOutputPin],ButtonMatrixPin[NowOutputPin], GPIO_PIN_SET); //Output->High
  800083a:	78fb      	ldrb	r3, [r7, #3]
  800083c:	4a16      	ldr	r2, [pc, #88]	; (8000898 <ButtonMatrixUpdate+0x108>)
  800083e:	f852 0023 	ldr.w	r0, [r2, r3, lsl #2]
@@ -950,7 +950,7 @@ void ButtonMatrixUpdate()
  800086e:	781b      	ldrb	r3, [r3, #0]
  8000870:	3304      	adds	r3, #4
  8000872:	70bb      	strb	r3, [r7, #2]
-		HAL_GPIO_WritePin(ButtonMatrixPort[NextOutputPin],ButtonMatrixPin[NextOutputPin], GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(ButtonMatrixPort[NextOutputPin],ButtonMatrixPin[NextOutputPin], GPIO_PIN_RESET); //Output->LOW
  8000874:	78bb      	ldrb	r3, [r7, #2]
  8000876:	4a08      	ldr	r2, [pc, #32]	; (8000898 <ButtonMatrixUpdate+0x108>)
  8000878:	f852 0023 	ldr.w	r0, [r2, r3, lsl #2]
@@ -1037,7 +1037,7 @@ void IDchecker() //ID = 62340500034 = 0b1111111111
  8000904:	4b81      	ldr	r3, [pc, #516]	; (8000b0c <IDchecker+0x264>)
  8000906:	801a      	strh	r2, [r3, #0]
 	}
-	else if(ButtonMatrixState == 0b1000)
+	else if(ButtonMatrixState == 0b1000)      //Press Clear
 	{
 		ID &= ~ID;
 	}
@@ -1052,7 +1052,7 @@ void IDchecker() //ID = 62340500034 = 0b1111111111
  8000916:	881b      	ldrh	r3, [r3, #0]
  8000918:	2b00      	cmp	r3, #0
  800091a:	f000 8131 	beq.w	8000b80 <IDchecker+0x2d8>
-			ID &= ~ID;
+			ID &= ~ID; //ID=0;
  800091e:	4b7b      	ldr	r3, [pc, #492]	; (8000b0c <IDchecker+0x264>)
  8000920:	2200      	movs	r2, #0
  8000922:	801a      	strh	r2, [r3, #0]
@@ -1368,7 +1368,7 @@ void IDchecker() //ID = 62340500034 = 0b1111111111
  8000b48:	801a      	strh	r2, [r3, #0]
 }
  8000b4a:	e019      	b.n	8000b80 <IDchecker+0x2d8>
-	else if(ID == 0b11111111111 && ButtonMatrixState == 0b1000000000000000) //
+	else if(ID == 0b11111111111 && ButtonMatrixState == 0b1000000000000000) // Press OK
  8000b4c:	4b0d      	ldr	r3, [pc, #52]	; (8000b84 <IDchecker+0x2dc>)
  8000b4e:	881b      	ldrh	r3, [r3, #0]
  8000b50:	f240 72ff 	movw	r2, #2047	; 0x7ff
@@ -1384,7 +1384,7 @@ void IDchecker() //ID = 62340500034 = 0b1111111111
  8000b68:	4808      	ldr	r0, [pc, #32]	; (8000b8c <IDchecker+0x2e4>)
  8000b6a:	f000 fbe1 	bl	8001330 <HAL_GPIO_WritePin>
  8000b6e:	e007      	b.n	8000b80 <IDchecker+0x2d8>
-	else if(ButtonMatrixState == 0b1000)
+	else if(ButtonMatrixState == 0b1000)      //Press Clear
  8000b70:	4b05      	ldr	r3, [pc, #20]	; (8000b88 <IDchecker+0x2e0>)
  8000b72:	881b      	ldrh	r3, [r3, #0]
  8000b74:	2b08      	cmp	r3, #8

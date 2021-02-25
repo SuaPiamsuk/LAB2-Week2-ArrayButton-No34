@@ -106,10 +106,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	ButtonMatrixUpdate();
 	IDchecker();
-//	if(ID == ) //check id = 62340500034
-//	{
-//
-//	}
+
   }
   /* USER CODE END 3 */
 }
@@ -287,12 +284,12 @@ void ButtonMatrixUpdate()
 			}
 		}
 		uint8_t NowOutputPin = ButtonMatrixLine + 4; // set Ln
-		HAL_GPIO_WritePin(ButtonMatrixPort[NowOutputPin],ButtonMatrixPin[NowOutputPin], GPIO_PIN_SET);
+		HAL_GPIO_WritePin(ButtonMatrixPort[NowOutputPin],ButtonMatrixPin[NowOutputPin], GPIO_PIN_SET); //Output->High
 
 		ButtonMatrixLine = (ButtonMatrixLine+1) % 4; //update new line
 
 		uint8_t NextOutputPin = ButtonMatrixLine + 4; // reset Ln+1
-		HAL_GPIO_WritePin(ButtonMatrixPort[NextOutputPin],ButtonMatrixPin[NextOutputPin], GPIO_PIN_RESET);
+		HAL_GPIO_WritePin(ButtonMatrixPort[NextOutputPin],ButtonMatrixPin[NextOutputPin], GPIO_PIN_RESET); //Output->LOW
 
 
 	}
@@ -316,7 +313,7 @@ void IDchecker() //ID = 62340500034 = 0b1111111111
 		}
 		else if(ButtonMatrixState != 0b1000000 && ButtonMatrixState != 0)
 		{
-			ID &= ~ID;
+			ID &= ~ID; //ID=0;
 		}
 	}
 	else if(ID == 0b11 ) 						     //check "3"
