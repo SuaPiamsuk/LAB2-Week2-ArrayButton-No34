@@ -976,11 +976,11 @@ void ButtonMatrixUpdate()
 
 080008a8 <IDchecker>:
 
-void IDchecker()
+void IDchecker() //ID = 62340500034 = 0b1111111111
 {
  80008a8:	b580      	push	{r7, lr}
  80008aa:	af00      	add	r7, sp, #0
-	if(ButtonMatrixState == 0 && ID != 0) //มีประโยชน์เมื่อ�?ดเลขซ้ำ
+	if(ButtonMatrixState == 0 && ID != 0)             	//เมื่อปล่อยจะเปลี่ยน 0 เป็น 1
  80008ac:	4b96      	ldr	r3, [pc, #600]	; (8000b08 <IDchecker+0x260>)
  80008ae:	881b      	ldrh	r3, [r3, #0]
  80008b0:	2b00      	cmp	r3, #0
@@ -998,7 +998,7 @@ void IDchecker()
  80008c6:	4b91      	ldr	r3, [pc, #580]	; (8000b0c <IDchecker+0x264>)
  80008c8:	801a      	strh	r2, [r3, #0]
 	}
-	if(ID == 0 && ButtonMatrixState == 0b1000000) //check "6"
+	if(ID == 0 && ButtonMatrixState == 0b1000000)     //check "6"
  80008ca:	4b90      	ldr	r3, [pc, #576]	; (8000b0c <IDchecker+0x264>)
  80008cc:	881b      	ldrh	r3, [r3, #0]
  80008ce:	2b00      	cmp	r3, #0
@@ -1058,7 +1058,7 @@ void IDchecker()
  8000922:	801a      	strh	r2, [r3, #0]
 }
  8000924:	e12c      	b.n	8000b80 <IDchecker+0x2d8>
-	else if(ID == 0b11 ) 						 //check "3"
+	else if(ID == 0b11 ) 						     //check "3"
  8000926:	4b79      	ldr	r3, [pc, #484]	; (8000b0c <IDchecker+0x264>)
  8000928:	881b      	ldrh	r3, [r3, #0]
  800092a:	2b03      	cmp	r3, #3
@@ -1092,7 +1092,7 @@ void IDchecker()
  8000960:	801a      	strh	r2, [r3, #0]
 }
  8000962:	e10d      	b.n	8000b80 <IDchecker+0x2d8>
-	else if(ID == 0b111 ) 						 //check "4"
+	else if(ID == 0b111 ) 						    //check "4"
  8000964:	4b69      	ldr	r3, [pc, #420]	; (8000b0c <IDchecker+0x264>)
  8000966:	881b      	ldrh	r3, [r3, #0]
  8000968:	2b07      	cmp	r3, #7
@@ -1126,7 +1126,7 @@ void IDchecker()
  800099c:	801a      	strh	r2, [r3, #0]
 }
  800099e:	e0ef      	b.n	8000b80 <IDchecker+0x2d8>
-	else if(ID == 0b1111 ) 						 //check "0"
+	else if(ID == 0b1111 ) 						   //check "0"
  80009a0:	4b5a      	ldr	r3, [pc, #360]	; (8000b0c <IDchecker+0x264>)
  80009a2:	881b      	ldrh	r3, [r3, #0]
  80009a4:	2b0f      	cmp	r3, #15
@@ -1160,7 +1160,7 @@ void IDchecker()
  80009d8:	801a      	strh	r2, [r3, #0]
 }
  80009da:	e0d1      	b.n	8000b80 <IDchecker+0x2d8>
-	else if(ID == 0b11111 ) 						 //check "5"
+	else if(ID == 0b11111 ) 					  //check "5"
  80009dc:	4b4b      	ldr	r3, [pc, #300]	; (8000b0c <IDchecker+0x264>)
  80009de:	881b      	ldrh	r3, [r3, #0]
  80009e0:	2b1f      	cmp	r3, #31
@@ -1194,7 +1194,7 @@ void IDchecker()
  8000a14:	801a      	strh	r2, [r3, #0]
 }
  8000a16:	e0b3      	b.n	8000b80 <IDchecker+0x2d8>
-	else if(ID == 0b111111 ) 						 //check "0" +1
+	else if(ID == 0b111111 ) 				     //check "0" +1
  8000a18:	4b3c      	ldr	r3, [pc, #240]	; (8000b0c <IDchecker+0x264>)
  8000a1a:	881b      	ldrh	r3, [r3, #0]
  8000a1c:	2b3f      	cmp	r3, #63	; 0x3f
@@ -1228,7 +1228,7 @@ void IDchecker()
  8000a50:	801a      	strh	r2, [r3, #0]
 }
  8000a52:	e095      	b.n	8000b80 <IDchecker+0x2d8>
-	else if(ID == 0b1111111 ) 						 //check "0" +2
+	else if(ID == 0b1111111 ) 				    //check "0" +2
  8000a54:	4b2d      	ldr	r3, [pc, #180]	; (8000b0c <IDchecker+0x264>)
  8000a56:	881b      	ldrh	r3, [r3, #0]
  8000a58:	2b7f      	cmp	r3, #127	; 0x7f

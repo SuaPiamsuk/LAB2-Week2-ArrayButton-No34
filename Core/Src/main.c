@@ -300,7 +300,7 @@ void ButtonMatrixUpdate()
 
 void IDchecker() //ID = 62340500034 = 0b1111111111
 {
-	if(ButtonMatrixState == 0 && ID != 0)
+	if(ButtonMatrixState == 0 && ID != 0)             	//เมื่อปล่อยจะเปลี่ยน 0 เป็น 1
 	{
 		ID |= (uint16_t)0x1;
 	}
@@ -418,11 +418,11 @@ void IDchecker() //ID = 62340500034 = 0b1111111111
 			ID &= ~ID;
 		}
 	}
-	else if(ID == 0b11111111111 && ButtonMatrixState == 0b1000000000000000) //
+	else if(ID == 0b11111111111 && ButtonMatrixState == 0b1000000000000000) // Press OK
 	{
 		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
 	}
-	else if(ButtonMatrixState == 0b1000)
+	else if(ButtonMatrixState == 0b1000)      //Press Clear
 	{
 		ID &= ~ID;
 	}
